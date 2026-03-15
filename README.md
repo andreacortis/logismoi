@@ -68,3 +68,4 @@ On every push to `main`:
 
 Changes to `index.html` (landing page) and changes to `catastrophes-app/src/`
 both trigger a full redeploy automatically.
+
