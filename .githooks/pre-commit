@@ -1,19 +1,26 @@
 #!/bin/bash
 
-# Auto-rebuild catastrophes app before commit
+REPO_ROOT=$(git rev-parse --show-toplevel)
+
+# Build catastrophes app
 echo "Building catastrophes app..."
-
-cd "$(git rev-parse --show-toplevel)/catastrophes-app" || exit 1
-
+cd "$REPO_ROOT/catastrophes-app" || exit 1
 npm run build
-
 if [ $? -ne 0 ]; then
-  echo "Build failed. Aborting commit."
+  echo "Catastrophes app build failed. Aborting commit."
   exit 1
 fi
-
-# Stage the built dist folder
 git add dist/
 
-echo "Build complete. Proceeding with commit."
+# Build diagram app
+echo "Building diagram app..."
+cd "$REPO_ROOT/diagram-app" || exit 1
+npm run build
+if [ $? -ne 0 ]; then
+  echo "Diagram app build failed. Aborting commit."
+  exit 1
+fi
+git add dist/
+
+echo "All builds complete. Proceeding with commit."
 exit 0
