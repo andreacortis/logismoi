@@ -80,7 +80,7 @@ function PageHeader({ cat }) {
         </div>
         <div style={{ fontFamily:"Georgia,serif", fontSize:20, color:"#dde6f0", fontWeight:400 }}>{cat.name}</div>
       </div>
-      <div style={{ fontFamily:"monospace", fontSize:7, color:"#111e2d", textAlign:"right" }}>V = {cat.potential}</div>
+      <div style={{ fontFamily:"monospace", fontSize:16, color:cat.color, textAlign:"right", fontWeight:600, letterSpacing:0.5 }}>V = {cat.potential}</div>
     </div>
   );
 }
