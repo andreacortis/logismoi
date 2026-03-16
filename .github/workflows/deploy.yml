@@ -38,12 +38,22 @@ jobs:
         working-directory: catastrophes-app
         run: npm run build
 
+      - name: Install diagram app dependencies
+        working-directory: diagram-app
+        run: npm install
+
+      - name: Build diagram app
+        working-directory: diagram-app
+        run: npm run build
+
       - name: Assemble site
         run: |
           mkdir -p _site
           cp index.html _site/index.html
           mkdir -p _site/catastrophes
           cp -r catastrophes-app/dist/. _site/catastrophes/
+          mkdir -p _site/diagram
+          cp -r diagram-app/dist/. _site/diagram/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
