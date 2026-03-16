@@ -7,6 +7,7 @@ const CATS = [
   { id:"butterfly",   name:"Butterfly",          codim:4, corank:1, color:"#e879f9", potential:"x\u2076/6 + ..." },
   { id:"elliptic",    name:"Elliptic Umbilic",   codim:3, corank:2, color:"#fb7185", potential:"x\u00B3 \u2212 3xy\u00B2 + c(x\u00B2+y\u00B2) \u2212 ax \u2212 by" },
   { id:"hyperbolic",  name:"Hyperbolic Umbilic", codim:3, corank:2, color:"#34d399", potential:"x\u00B3 + y\u00B3 + cxy \u2212 ax \u2212 by" },
+  { id:"parabolic",   name:"Parabolic Umbilic",  codim:4, corank:2, color:"#fbbf24", potential:"x\u00B2y + y\u2074 + cx\u00B2 + dy\u00B2 \u2212 ax \u2212 by" },
 ];
 
 // ── math ─────────────────────────────────────────────────────────────────────
@@ -689,6 +690,14 @@ const EXAMPLES = {
     {domain:"Shock Waves",         title:"Mach Stem Formation",             body:"The transition from regular to Mach reflection — where a new shock appears discontinuously — is a hyperbolic umbilic. The fold locus is the von Neumann criterion in (Mach number, wedge angle) space."},
     {domain:"Soap Films",          title:"Plateau Border Reconnection",     body:"When two soap bubbles coalesce, three films at a Plateau border rearrange to a different set of three films. This topological transition is a hyperbolic umbilic — the crossing point is four-way marginally stable."},
   ],
+  parabolic: [
+    {domain:"Morphogenesis",       title:"Umbilic Points on Biological Surfaces",    body:"Hair whorls, skin creases, and corneal surface topology are governed by umbilic points — locations where principal curvatures are equal. The D₅ organizing center governs the transition between elliptic and hyperbolic umbilic patterns on smoothly deforming surfaces."},
+    {domain:"Fluid Dynamics",      title:"Wave Transition: Breaking to Non-breaking",body:"The boundary between breaking and non-breaking wave regimes in three-dimensional water waves is organized by the parabolic umbilic. Crossing from the hyperbolic umbilic (breaking) to the elliptic umbilic (focusing without breaking) passes through the D₅ structure."},
+    {domain:"Optics",              title:"Organizing Center for Umbilic Caustics",   body:"In three-dimensional optical systems, the parabolic umbilic is the codimension-4 singularity that organizes transitions between the deltoid (elliptic) and X-shaped (hyperbolic) caustic geometries. It appears in astigmatic lens systems near the transition between the two umbilic focal regimes."},
+    {domain:"Elasticity",          title:"Shell Buckling Transition",                body:"The transition between symmetric and asymmetric buckling modes in thin elastic shells under combined loading passes through the D₅ organizing center. The four-parameter space (two load components, two geometric parameters) is exactly the control space of the parabolic umbilic."},
+    {domain:"Phase Transitions",   title:"Liquid Crystal Texture Transitions",       body:"In nematic liquid crystals, the transition between radial (elliptic umbilic) and hyperbolic defect textures is organized by D₅. The extra control parameter is the elastic anisotropy ratio, which continuously deforms one umbilic texture into the other through the parabolic transition."},
+    {domain:"Developmental Bio",   title:"Symmetry Breaking in Gastrulation",        body:"Thom proposed D₅ as the organizing center for the transition between the triradiate (elliptic) and bilateral (hyperbolic) gastrulation geometries. The four control parameters map to morphogen gradients, mechanical stress, and embryo geometry; the parabolic umbilic is the point at which these symmetry classes exchange stability."},
+  ],
 };
 
 function ExamplesPanel({ catId, color }) {
@@ -708,6 +717,162 @@ function ExamplesPanel({ catId, color }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+// ── PARABOLIC UMBILIC ─────────────────────────────────────────────────────────
+function ParabolicPage() {
+  const COL = "#fbbf24";
+  const W = 720, H = 320;
+
+  // Static SVG: schematic of the parabolic umbilic bifurcation set
+  // It has a "purse" or "beak-to-beak" structure in 2D cross-sections
+  // Four distinct regions: 0, 1, 2, or 3 stable states
+  // We show: the wing-like bifurcation set in (a,b) plane at fixed c,d
+  // and a 3D schematic of the umbilic point structure
+
+  return (
+    <div style={{ display:"flex", flexDirection:"column", gap:20 }}>
+
+      {/* Two diagrams side by side */}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+
+        {/* Left: bifurcation set cross-section */}
+        <div style={{ background:"#090f1a", border:"1px solid #18293d", borderRadius:2, padding:14 }}>
+          <div style={{ fontFamily:"monospace", fontSize:8, letterSpacing:2, color:"#1a2b3c", marginBottom:10, textTransform:"uppercase" }}>
+            Bifurcation Set (c, d fixed)
+          </div>
+          <svg width="100%" viewBox="0 0 340 300" style={{ display:"block" }}>
+            {/* Grid */}
+            {[-1,0,1,2].map(v => { const x=80+v*60; return <line key={"vg"+v} x1={x} y1={10} x2={x} y2={290} stroke="#0c1825" strokeWidth={0.5}/>; })}
+            {[-2,-1,0,1,2].map(v => { const y=150+v*50; return <line key={"hg"+v} x1={20} y1={y} x2={320} y2={y} stroke="#0c1825" strokeWidth={0.5}/>; })}
+            {/* Axes */}
+            <line x1={80} y1={10} x2={80} y2={290} stroke="#1e3347" strokeWidth={0.8}/>
+            <line x1={20} y1={150} x2={320} y2={150} stroke="#1e3347" strokeWidth={0.8}/>
+            <text x={308} y={144} fill="#253d52" fontSize={9} fontFamily="monospace">a</text>
+            <text x={84} y={18} fill="#253d52" fontSize={9} fontFamily="monospace">b</text>
+            {/* Upper arm */}
+            <path d="M80 150 C100 100 140 65 200 50 C240 40 280 48 310 62"
+                  fill="none" stroke="#fbbf24" strokeWidth={2} opacity={0.9}/>
+            {/* Lower arm */}
+            <path d="M80 150 C100 200 140 235 200 250 C240 260 280 252 310 238"
+                  fill="none" stroke="#fbbf24" strokeWidth={2} opacity={0.9}/>
+            {/* Inner dashed branches (pocket) */}
+            <path d="M80 150 C62 132 44 122 26 120"
+                  fill="none" stroke="#fbbf24" strokeWidth={1.5} strokeDasharray="4 3" opacity={0.55}/>
+            <path d="M80 150 C62 168 44 178 26 180"
+                  fill="none" stroke="#fbbf24" strokeWidth={1.5} strokeDasharray="4 3" opacity={0.55}/>
+            {/* Umbilic point */}
+            <circle cx={80} cy={150} r={5} fill="#fbbf24" opacity={0.9}/>
+            <text x={87} y={145} fill="#fbbf24" fontSize={8} fontFamily="monospace">D₅</text>
+            <text x={87} y={156} fill="#3a5570" fontSize={7} fontFamily="monospace">umbilic</text>
+            {/* Region labels */}
+            <text x={185} y={148} fill="#c8d8e8" fontSize={8} fontFamily="monospace" textAnchor="middle">2 states</text>
+            <text x={260} y={110} fill="#c8d8e8" fontSize={7} fontFamily="monospace" textAnchor="middle">1 state</text>
+            <text x={260} y={200} fill="#c8d8e8" fontSize={7} fontFamily="monospace" textAnchor="middle">1 state</text>
+            <text x={46} y={136} fill="#c8d8e8" fontSize={7} fontFamily="monospace" textAnchor="middle">3</text>
+            <text x={46} y={167} fill="#c8d8e8" fontSize={7} fontFamily="monospace" textAnchor="middle">0</text>
+          </svg>
+        </div>
+
+        {/* Right: parameter hierarchy */}
+        <div style={{ background:"#090f1a", border:"1px solid #18293d", borderRadius:2, padding:14 }}>
+          <div style={{ fontFamily:"monospace", fontSize:8, letterSpacing:2, color:"#1a2b3c", marginBottom:10, textTransform:"uppercase" }}>
+            Parameter Hierarchy
+          </div>
+          <svg width="100%" viewBox="0 0 300 300" style={{ display:"block" }}>
+            <defs>
+              <marker id="arPar" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="5" markerHeight="5" orient="auto">
+                <path d="M1 1L7 4L1 7" fill="none" stroke="#3a5570" strokeWidth={1.5}/>
+              </marker>
+            </defs>
+            {/* D5 */}
+            <rect x={90} y={20} width={120} height={36} rx={2} fill="#1a1208" stroke="#fbbf24" strokeWidth={1}/>
+            <text x={150} y={38} fill="#fbbf24" fontSize={9} fontFamily="monospace" textAnchor="middle">D₅  codim 4</text>
+            <text x={150} y={50} fill="#5a4010" fontSize={7} fontFamily="monospace" textAnchor="middle">parabolic umbilic</text>
+            {/* arrows */}
+            <line x1={120} y1={56} x2={80} y2={86} stroke="#3a5570" strokeWidth={1} markerEnd="url(#arPar)"/>
+            <line x1={180} y1={56} x2={220} y2={86} stroke="#3a5570" strokeWidth={1} markerEnd="url(#arPar)"/>
+            {/* D4- */}
+            <rect x={10} y={86} width={120} height={36} rx={2} fill="#1a0808" stroke="#fb7185" strokeWidth={0.8}/>
+            <text x={70} y={104} fill="#fb7185" fontSize={9} fontFamily="monospace" textAnchor="middle">D₄⁻  codim 3</text>
+            <text x={70} y={115} fill="#5a2020" fontSize={7} fontFamily="monospace" textAnchor="middle">elliptic umbilic</text>
+            {/* D4+ */}
+            <rect x={170} y={86} width={120} height={36} rx={2} fill="#081a0e" stroke="#34d399" strokeWidth={0.8}/>
+            <text x={230} y={104} fill="#34d399" fontSize={9} fontFamily="monospace" textAnchor="middle">D₄⁺  codim 3</text>
+            <text x={230} y={115} fill="#0a3020" fontSize={7} fontFamily="monospace" textAnchor="middle">hyperbolic umbilic</text>
+            {/* arrows to A3 */}
+            <line x1={70}  y1={122} x2={110} y2={152} stroke="#3a5570" strokeWidth={0.8} markerEnd="url(#arPar)"/>
+            <line x1={230} y1={122} x2={190} y2={152} stroke="#3a5570" strokeWidth={0.8} markerEnd="url(#arPar)"/>
+            {/* A3 */}
+            <rect x={100} y={152} width={100} height={32} rx={2} fill="#060f0a" stroke="#00cc60" strokeWidth={0.8}/>
+            <text x={150} y={169} fill="#00cc60" fontSize={9} fontFamily="monospace" textAnchor="middle">A₃  codim 2</text>
+            <text x={150} y={179} fill="#0a3018" fontSize={7} fontFamily="monospace" textAnchor="middle">cusp</text>
+            {/* note */}
+            <text x={150} y={220} fill="#3a5570" fontSize={7} fontFamily="monospace" textAnchor="middle">D₅ is the unique organizing</text>
+            <text x={150} y={233} fill="#3a5570" fontSize={7} fontFamily="monospace" textAnchor="middle">center for both D₄ umbilics.</text>
+            <text x={150} y={250} fill="#3a5570" fontSize={7} fontFamily="monospace" textAnchor="middle">Slicing its parameter space</text>
+            <text x={150} y={263} fill="#3a5570" fontSize={7} fontFamily="monospace" textAnchor="middle">reveals either D₄⁻ or D₄⁺</text>
+            <text x={150} y={276} fill="#3a5570" fontSize={7} fontFamily="monospace" textAnchor="middle">depending on direction.</text>
+          </svg>
+        </div>
+
+      </div>
+
+      {/* Explanation panels */}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+
+        <div style={{ background:"#090f1a", border:"1px solid #18293d", borderRadius:2, padding:14 }}>
+          <div style={{ fontFamily:"monospace", fontSize:8, letterSpacing:2, color:`${COL}80`, textTransform:"uppercase", marginBottom:10 }}>
+            Why it is different
+          </div>
+          <div style={{ fontFamily:"Georgia,serif", fontSize:12, color:"#8899aa", lineHeight:1.85 }}>
+            The parabolic umbilic D₅ is the only one of the seven elementary catastrophes that
+            is an organizing center for two other catastrophes simultaneously. Its parameter space
+            contains both the elliptic umbilic D₄⁻ and the hyperbolic umbilic D₄⁺ as special
+            cross-sections, separated by a wall of cusp bifurcations A₃. Moving through the
+            four-dimensional parameter space, one passes continuously between the deltoid
+            structure of the elliptic and the two-branched structure of the hyperbolic — a
+            transition that cannot happen within either D₄ type alone.
+          </div>
+          <div style={{ fontFamily:"Georgia,serif", fontSize:12, color:"#8899aa", lineHeight:1.85, marginTop:10 }}>
+            Its bifurcation set has four qualitatively distinct regions in any generic
+            two-dimensional cross-section, with 0, 1, 2, or 3 stable states — one more than
+            either D₄ umbilic can produce in isolation. The umbilic point itself is the
+            unique point in parameter space where all four regions meet.
+          </div>
+        </div>
+
+        <div style={{ background:"#090f1a", border:"1px solid #18293d", borderRadius:2, padding:14 }}>
+          <div style={{ fontFamily:"monospace", fontSize:8, letterSpacing:2, color:`${COL}80`, textTransform:"uppercase", marginBottom:10 }}>
+            Why it is rarely visualized
+          </div>
+          <div style={{ fontFamily:"Georgia,serif", fontSize:12, color:"#8899aa", lineHeight:1.85 }}>
+            Visualization requires four control parameters (a, b, c, d) and two state variables
+            (x, y) simultaneously. The equilibrium surface lives in a six-dimensional space.
+            Any rendering is a projection or cross-section, and different cross-sections reveal
+            qualitatively different behaviour — elliptic-umbilic-like in one slice,
+            hyperbolic-umbilic-like in another. There is no single three-dimensional picture
+            that captures the full structure, unlike D₄± which each have a canonical three-dimensional
+            representation.
+          </div>
+          <div style={{ fontFamily:"Georgia,serif", fontSize:12, color:"#8899aa", lineHeight:1.85, marginTop:10 }}>
+            The potential V = x²y + y⁴ + cx² + dy² − ax − by has a symmetry broken by the
+            asymmetric coupling term x²y: when x → −x the potential changes, which is why the
+            parabolic umbilic lacks the reflective symmetry of the elliptic and hyperbolic cases.
+          </div>
+        </div>
+
+      </div>
+
+      {/* Status bar */}
+      <div style={{ width:"100%", padding:"8px 14px", background:"#060c14",
+        border:"1px solid #fbbf2430", borderRadius:2,
+        fontFamily:"monospace", fontSize:9, color:"#5a4010", letterSpacing:0.5 }}>
+        D₅ · codim 4 · corank 2 · V = x²y + y⁴ + cx² + dy² − ax − by · organizing center for both D₄ umbilics · four stable-state regions · no interactive diagram (6-dimensional parameter+state space)
+      </div>
+
     </div>
   );
 }
@@ -736,7 +901,7 @@ class PageBoundary extends Component {
 }
 
 // ── ROOT ──────────────────────────────────────────────────────────────────────
-const PAGES = { fold:FoldPage, cusp:CuspPage, swallowtail:SwallowtailPage, butterfly:ButterflyPage, elliptic:EllipticPage, hyperbolic:HyperbolicPage };
+const PAGES = { fold:FoldPage, cusp:CuspPage, swallowtail:SwallowtailPage, butterfly:ButterflyPage, elliptic:EllipticPage, hyperbolic:HyperbolicPage, parabolic:ParabolicPage };
 
 export default function App() {
   const [active, setActive] = useState("fold");
