@@ -15,7 +15,7 @@ git add dist/
 # Build diagram app
 echo "Building diagram app..."
 cd "$REPO_ROOT/diagram-app" || exit 1
-npm run build
+NODE_ENV=production npm run build
 if [ $? -ne 0 ]; then
   echo "Diagram app build failed. Aborting commit."
   exit 1
