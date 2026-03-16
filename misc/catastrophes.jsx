@@ -747,7 +747,7 @@ export default function App() {
       display:"flex", flexDirection:"column", alignItems:"center", padding:"24px 16px 56px" }}>
       <div style={{ textAlign:"center", marginBottom:22, maxWidth:760, width:"100%" }}>
         <div style={{ fontSize:8, letterSpacing:5, color:"#0e1a26", textTransform:"uppercase", marginBottom:7 }}>
-          Ren\u00E9 Thom \u00B7 Stabilit\u00E9 Structurelle et Morphogen\u00E8se \u00B7 1972
+          René Thom · Stabilité Structurelle et Morphogenèse · 1972
         </div>
         <h1 style={{ margin:0, fontSize:20, fontWeight:400, fontFamily:"Georgia,serif", color:"#dde6f0", letterSpacing:0.3 }}>
           The Elementary Catastrophes
