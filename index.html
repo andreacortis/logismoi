@@ -595,11 +595,14 @@ let QUOTES = [];
 
 async function loadQuotes() {
   try {
-    const response = await fetch('./thom_quotes.json');
+    const basePath = document.currentScript?.src.includes('/logismoi/') ? '/logismoi' : '';
+    const response = await fetch(basePath + '/thom_quotes.json');
     QUOTES = await response.json();
     setQuote();
   } catch (error) {
     console.error('Error loading quotes:', error);
+    // Fallback: show default quote if JSON fails to load
+    setQuoteFallback();
   }
 }
 
@@ -608,9 +611,25 @@ function getRandomQuote() {
   return QUOTES[Math.floor(Math.random() * QUOTES.length)];
 }
 
+function setQuoteFallback() {
+  const fallback = {
+    quote: "Every object in the universe — every persistent form, every stable configuration — exists because it is an attractor. The forms we see are not the forms that are possible; they are the forms that survive.",
+    author: "René Thom",
+    source: "Structural Stability and Morphogenesis",
+    year: 1972
+  };
+  const text = fallback.quote;
+  const attr = `${fallback.author} · ${fallback.source} · ${fallback.year}`;
+  document.getElementById('quote-text').textContent = text;
+  document.getElementById('quote-attr').textContent = attr;
+}
+
 function setQuote() {
   const q = getRandomQuote();
-  if (!q) return;
+  if (!q) {
+    setQuoteFallback();
+    return;
+  }
   
   const text = q.quote;
   const attr = `${q.author} · ${q.source} · ${q.year}`;
