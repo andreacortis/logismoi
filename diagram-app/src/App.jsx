@@ -81,29 +81,16 @@ const NODES = {
          desc:"The good for a thing is the actualization of what it essentially is. Violation of form is simultaneously disorder and wrong. Witnesses: dharma, ṛta/anṛta, maryādā, zhèngmíng, hudud Allah." },
   A5:  { label:"Encounter Requires Boundary",  sub:"The limit as condition of relation",    t:"A", c:0.85,  x:1.42,
          desc:"Two surfaces pressed flat against each other fuse. The boundary preserves integrity so that meeting, not merger, can occur. Witnesses: ma (Japanese), confinium (Latin), limen. Register: Buber's I-Thou, Levinas's face, von Balthasar on difference as condition of love." },
-  F1:  { label:"Dissolution as Liberation",    sub:"The boundary is a prison",              t:"F", c:-0.80, x:-1.42,
-         desc:"Extracts the contemplative summit of Advaita/Daoism and applies it as a political program. Severs transcendence from what it transcends toward. Contemporary: gender dissolution ideologies, posthumanism, self-creation as sovereign good. Mirror on the lower sheet of Docetism: both extract the bounded/human pole." },
-  F2:  { label:"Pure Form / No Matter",        sub:"The Gnostic inversion",                 t:"F", c:-0.40, x:-1.55,
-         desc:"Takes the priority of form and severs the hylomorphic unity. Form becomes a pattern floating free of material instantiation. Gnosticism with a CPU. Contemporary: information paradigm, transhumanism, inner-pattern gender self-identification. Mirrors Apollinarianism on the lower sheet." },
-  F3:  { label:"Naming as Violence",           sub:"Definition as oppression",              t:"F", c:0.15,  x:-1.65,
-         desc:"Universalizes the pathology of definition: all names are impositions, all boundaries are power structures. Contemporary: radical constructivism, demolition of natural categories as political act." },
-  F4:  { label:"The One Absorbs All",          sub:"Totality swallows the individual",      t:"F", c:0.60,  x:-1.55,
-         desc:"Locates the unity of being horizontally in a finite collective rather than vertically in the transcendent ground. Contemporary: totalitarianism, platform absorption of persons, dissolution of subsidiarity." },
-  F5:  { label:"Boundaries as Convention",     sub:"Nominalism",                            t:"F", c:0.85,  x:-1.42,
-         desc:"From epistemological humility to the ontological claim that reality has no joints of its own. Genealogical root: Ockham → Descartes → information paradigm → administrative constructivism. Mirrors Arianism on the lower sheet: both extract the transcendent/universal pole." },
-  // ── Christological heresies (lower sheet) ──────────────────
-  // Low-c side: humanity extracted — mirrors F1/F2
-  DOC: { label:"Docetism",                     sub:"Humanity illusory",                     t:"H", c:-0.72, x:-1.52,
-         desc:"Christ only appeared to have a body — the suffering, cross, and wounds were illusion. The most radical extraction of the human pole: the divine cannot genuinely enter the bounded condition. Origins in Gnosticism; opposed already in John's letters. Shares its region with F1 (Dissolution as Liberation): both dissolve the bounded/human form, one in Christology, the other in anthropology." },
-  APO: { label:"Apollinarianism",              sub:"Humanity partial",                      t:"H", c:-0.22, x:-1.38,
-         desc:"Christ had a human body and animal soul, but the divine Logos replaced the human rational mind. Partial humanity — the highest faculty missing. Condemned at Constantinople (381). Gregory of Nazianzus: what is not assumed is not healed. Shares its region with F2 (Pure Form / No Matter)." },
-  MNT: { label:"Monothelitism",               sub:"Human will removed",                    t:"H", c:0.12,  x:-1.17,
-         desc:"Christ has two natures but only one will — the divine. The human will is extracted. Condemned at Constantinople III (681). Maximus the Confessor died for the position that Christ's human will freely conformed to the divine — without which the Redemption is not a free human act." },
-  // High-c side: transcendence extracted — mirrors F4/F5
-  ARI: { label:"Arianism",                     sub:"Divinity reduced — not same substance", t:"H", c:0.88,  x:-1.12,
-         desc:"Christ is the highest of creatures — of similar but not the same substance as the Father. The transcendence pole extracted. Condemned at Nicaea (325). Still numerically the most widespread heresy in history. Shares its region with F5 (Nominalism): both extract the transcendent/universal pole — nominalism from reality in general, Arianism from Christ specifically." },
-  ADO: { label:"Adoptionism",                  sub:"Divinity conferred, not possessed",     t:"H", c:0.74,  x:-1.06,
-         desc:"Christ was a human being so perfectly obedient that God adopted him as Son — at the Baptism or Resurrection. Divinity is status conferred, not nature possessed. A milder form of the same extraction as Arianism." },
+  F1:  { label:"Dissolution as Liberation / Docetism",    sub:"Humanity dissolved",              t:"F", c:-0.72, x:-1.52,
+         desc:"Extracts the contemplative summit of Advaita/Daoism as a political program. Severs transcendence from what it transcends toward. In Christology: Christ only appeared to have a body; suffering, cross, and wounds are illusion. The most radical extraction of the human pole. Contemporary: gender dissolution ideologies, posthumanism. Both dissolve the bounded/human form." },
+  F2:  { label:"Pure Form / No Matter / Apollinarianism",        sub:"Divinity without humanity",                 t:"F", c:-0.22, x:-1.38,
+         desc:"Takes the priority of form and severs the hylomorphic unity. Form becomes pattern floating free of material instantiation. In Christology: Christ had body and animal soul, but divine Logos replaced the human rational mind. Partial humanity—the highest faculty missing. Condemned at Constantinople (381). Gregory of Nazianzus: what is not assumed is not healed." },
+  F3:  { label:"Naming as Violence / Monothelitism",           sub:"Will and definition dissolved",              t:"F", c:0.12,  x:-1.17,
+         desc:"Universalizes the pathology of definition: all names are impositions, all boundaries are power structures. In Christology: Christ has two natures but only one will—the divine. Human will is extracted. Condemned at Constantinople III (681). Maximus the Confessor: Christ's human will must freely conform to the divine, or the Redemption is not a free human act." },
+  F4:  { label:"The One Absorbs All / Adoptionism",          sub:"Individual absorbed or adopted",      t:"F", c:0.74,  x:-1.06,
+         desc:"Locates unity of being horizontally in a finite collective, not vertically in transcendent ground. In Christology: Christ was a human so perfectly obedient that God adopted him as Son—at Baptism or Resurrection. Divinity conferred as status, not possessed as nature. Contemporary: totalitarianism, platform absorption of persons." },
+  F5:  { label:"Boundaries as Convention / Arianism",     sub:"Transcendence extracted",                            t:"F", c:0.88,  x:-1.12,
+         desc:"From epistemological humility to ontological claim that reality has no joints of its own. Genealogical root: Ockham → Descartes → information paradigm. In Christology: Christ is highest of creatures—similar but not same substance as Father. Transcendence pole extracted. Condemned at Nicaea (325). Both extract the transcendent/universal pole." },
   // ── Pocket heresies (locally stable, globally unstable) ────
   MPH: { label:"Monophysitism",                sub:"Natures fused — drop in ocean",         t:"K", c:0.50,  x:0.22,
          desc:"After the Incarnation Christ has a single fused nature — the human absorbed into the divine like a drop of water in the ocean. Claims to preserve both natures while the distinction has internally collapsed. The pocket position: locally stable (defended by whole councils, inhabited by whole churches), globally unstable — any serious pressure on the humanity question tips it into full Docetism. Condemned at Chalcedon (451)." },
@@ -236,7 +223,7 @@ export default function ButterflyAttractor() {
     });
 
     // ── Flux lines ─────────────────────────────────────────────
-    // Genuine → False (dashed red, extraction across outer fold)
+    // Genuine → False/Heresies (red extraction across sheets)
     [['A1','F1'],['A2','F2'],['A3','F3'],['A4','F4'],['A5','F5']].forEach(([g,f])=>{
       const s=NODES[g], e=NODES[f];
       for(let k=0;k<22;k+=2){
@@ -258,18 +245,6 @@ export default function ButterflyAttractor() {
             pt(s.c+(e.c-s.c)*(i+1)/18, s.x+(e.x-s.x)*(i+1)/18)
           ]),
           new THREE.LineBasicMaterial({color:0xb07810,transparent:true,opacity:0.38})));
-      }
-    });
-    // Pocket → lower sheet (gravity arrows showing instability)
-    [['MPH','DOC'],['NES','ARI']].forEach(([pk,ls])=>{
-      const s=NODES[pk], e=NODES[ls];
-      for(let i=0;i<12;i+=2){
-        pivot.add(new THREE.Line(
-          new THREE.BufferGeometry().setFromPoints([
-            pt(s.c+(e.c-s.c)*i/12, s.x+(e.x-s.x)*i/12),
-            pt(s.c+(e.c-s.c)*(i+1)/12, s.x+(e.x-s.x)*(i+1)/12)
-          ]),
-          new THREE.LineBasicMaterial({color:0x988010,transparent:true,opacity:0.28})));
       }
     });
 
