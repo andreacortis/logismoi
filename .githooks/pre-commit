@@ -1,0 +1,19 @@
+#!/bin/bash
+
+# Auto-rebuild catastrophes app before commit
+echo "Building catastrophes app..."
+
+cd "$(git rev-parse --show-toplevel)/catastrophes-app" || exit 1
+
+npm run build
+
+if [ $? -ne 0 ]; then
+  echo "Build failed. Aborting commit."
+  exit 1
+fi
+
+# Stage the built dist folder
+git add dist/
+
+echo "Build complete. Proceeding with commit."
+exit 0
