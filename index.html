@@ -590,52 +590,40 @@ footer {
 
 <script>
 // ── QUOTE ROTATION ────────────────────────────────────────────────────────────
-// Add or remove quotes here. One appears per day, cycling automatically.
-const QUOTES = [
-  {
-    text: "Every object in the universe — every persistent form, every stable configuration — exists because it is an attractor. The forms we see are not the forms that are possible; they are the forms that survive.",
-    attr: "René Thom · Structural Stability and Morphogenesis · 1972"
-  },
-  {
-    text: "A form is what resists. Not in the sense of opposition, but in the sense of persistence — of being something that does not simply dissolve into its surroundings when conditions change.",
-    attr: "René Thom · Modèles mathématiques de la morphogenèse · 1974"
-  },
-  {
-    text: "The catastrophe is not the disaster. It is the moment of qualitative change — the fold point at which one regime ceases to be available and another becomes the only possibility.",
-    attr: "René Thom · Stabilité Structurelle et Morphogenèse · 1972"
-  },
-  {
-    text: "To classify the singularities of smooth maps is to classify the ways in which continuity fails — and therefore to classify the ways in which novelty enters the world.",
-    attr: "René Thom · Collected Papers · 1980"
-  },
-  {
-    text: "The universe is not indifferent between forms. Some configurations last; others dissolve immediately. The study of what lasts, and why, is the deepest question mathematics can address.",
-    attr: "René Thom · L'explication des formes · 1991"
-  },
-  {
-    text: "Discontinuity is not an exception to the smooth order of things. It is a theorem about that order — a necessary consequence of smoothness in the presence of degeneracy.",
-    attr: "René Thom · Structural Stability and Morphogenesis · 1972"
-  },
-  {
-    text: "Every boundary is simultaneously a constraint and a condition of possibility. What cannot cross the threshold cannot be dissolved by it either.",
-    attr: "René Thom · Esquisse d'une sémiophysique · 1988"
-  },
-];
+// Load quotes from thom_quotes.json
+let QUOTES = [];
 
-function getQuoteIndex() {
-  const day = Math.floor(Date.now() / 86400000);
-  return day % QUOTES.length;
+async function loadQuotes() {
+  try {
+    const response = await fetch('./thom_quotes.json');
+    QUOTES = await response.json();
+    setQuote();
+  } catch (error) {
+    console.error('Error loading quotes:', error);
+  }
+}
+
+function getRandomQuote() {
+  if (QUOTES.length === 0) return null;
+  return QUOTES[Math.floor(Math.random() * QUOTES.length)];
 }
 
 function setQuote() {
-  const q = QUOTES[getQuoteIndex()];
-  document.getElementById('quote-text').textContent = q.text;
-  document.getElementById('quote-attr').textContent = q.attr;
+  const q = getRandomQuote();
+  if (!q) return;
+  
+  const text = q.quote;
+  const attr = `${q.author} · ${q.source} · ${q.year}`;
+  
+  document.getElementById('quote-text').textContent = text;
+  document.getElementById('quote-attr').textContent = attr;
 }
 
 function copyQuote() {
-  const q = QUOTES[getQuoteIndex()];
-  const text = `"${q.text}"\n\n— ${q.attr}`;
+  const q = getRandomQuote();
+  if (!q) return;
+  
+  const text = `"${q.quote}"\n\n— ${q.author} · ${q.source} · ${q.year}`;
   navigator.clipboard.writeText(text).then(() => {
     const hint = document.getElementById('copy-hint');
     hint.textContent = '✓ copied';
@@ -647,7 +635,7 @@ function copyQuote() {
   });
 }
 
-setQuote();
+loadQuotes();
 </script>
 </body>
 </html>
