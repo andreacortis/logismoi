@@ -54,6 +54,8 @@ jobs:
           cp -r catastrophes-app/dist/. _site/catastrophes/
           mkdir -p _site/diagram
           cp -r diagram-app/dist/. _site/diagram/
+          mkdir -p _site/static_pages
+          cp -r static_pages/. _site/static_pages/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
