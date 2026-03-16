@@ -71,8 +71,6 @@ const ZOOM_MIN = 3.5, ZOOM_MAX = 18.0;
 // ── Node data ─────────────────────────────────────────────────────────
 // Node positions verified on correct sheets (see working notes)
 const NODES = {
-  P:   { label:"Christ",                       sub:"True Man · True God",                 t:"P", c:0.20,  x:1.75,
-         desc:"The hypostatic union: perfect bounded form receiving infinite content without dissolution. The global minimum of the potential — equidistant from both collapse directions. The fold is not escaped here: it is resolved. The Chalcedonian adverbs name the conditions for remaining on this surface: without confusion, without change (ruling out the lower sheet via fusion), without division, without separation (ruling out the lower sheet via splitting). The wounds remain in the Resurrection." },
   A1:  { label:"Bounded Form",                 sub:"Being requires determination",          t:"A", c:-0.80, x:1.42,
          desc:"To be something is to be bounded. Loss of form is not liberation — it is ceasing to be what one was. Witnesses: peras/apeiron (Greek), maryādā (Sanskrit), gvul (Hebrew), hadd (Arabic), jiè (Chinese), grens (Dutch/Slavic)." },
   A2:  { label:"Definition as Boundary",       sub:"Knowability requires form",             t:"A", c:-0.40, x:1.55,
@@ -227,7 +225,7 @@ export default function ButterflyAttractor() {
     Object.entries(NODES).forEach(([id,d]) => {
       const p=pt(d.c,d.x);
       npos[id]=p.clone();
-      const r = id==='P' ? 0.165 : 0.092;
+      const r = 0.092;
       const col=new THREE.Color(nodeHex(d.t));
       const m=new THREE.Mesh(
         new THREE.SphereGeometry(r,18,18),
@@ -235,21 +233,9 @@ export default function ButterflyAttractor() {
       );
       m.position.copy(p); m.userData.id=id;
       pivot.add(m); meshes[id]=m;
-      if (id==='P') [0.27,0.43].forEach((rr,ri)=>{
-        const tr=new THREE.Mesh(new THREE.TorusGeometry(rr,0.011,8,50),
-          new THREE.MeshBasicMaterial({color:0xd4a843,transparent:true,opacity:0.62-ri*0.26}));
-        tr.position.copy(p); pivot.add(tr);
-      });
     });
 
     // ── Flux lines ─────────────────────────────────────────────
-    // Genuine → Christ (blue convergence, upper sheet)
-    ['A1','A2','A3','A4','A5'].forEach(id=>{
-      const s=NODES[id], e=NODES.P, pts=[];
-      for(let k=0;k<=40;k++){const t=k/40; pts.push(pt(s.c+(e.c-s.c)*t, s.x+(e.x-s.x)*t));}
-      pivot.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
-        new THREE.LineBasicMaterial({color:0x4488cc,transparent:true,opacity:0.46})));
-    });
     // Genuine → False (dashed red, extraction across outer fold)
     [['A1','F1'],['A2','F2'],['A3','F3'],['A4','F4'],['A5','F5']].forEach(([g,f])=>{
       const s=NODES[g], e=NODES[f];
@@ -422,7 +408,6 @@ export default function ButterflyAttractor() {
       <div style={{display:'flex',justifyContent:'center',flexWrap:'wrap',
         gap:'6px 15px',fontSize:10,color:'#3a3018',marginBottom:3,
         padding:'0 12px',letterSpacing:'0.08em'}}>
-        <span>● <span style={{color:'#d4a843'}}>Christ</span></span>
         <span>● <span style={{color:'#4488cc'}}>Genuine attractor</span></span>
         <span>● <span style={{color:'#cc2828'}}>False attractor</span></span>
         <span>● <span style={{color:'#cc5522'}}>Christological heresy</span></span>
