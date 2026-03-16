@@ -595,13 +595,16 @@ let QUOTES = [];
 
 async function loadQuotes() {
   try {
-    const basePath = document.currentScript?.src.includes('/logismoi/') ? '/logismoi' : '';
-    const response = await fetch(basePath + '/thom_quotes.json');
+    // Use relative path which works both locally and on GitHub Pages
+    const response = await fetch('./thom_quotes.json');
+    if (!response.ok) {
+      throw new Error(`Failed to load quotes: HTTP ${response.status}`);
+    }
     QUOTES = await response.json();
+    console.log(`Successfully loaded ${QUOTES.length} quotes from ./thom_quotes.json`);
     setQuote();
   } catch (error) {
-    console.error('Error loading quotes:', error);
-    // Fallback: show default quote if JSON fails to load
+    console.error('Failed to load quotes.json:', error);
     setQuoteFallback();
   }
 }
