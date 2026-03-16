@@ -39,7 +39,17 @@ git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
 git push -u origin main
 ```
 
-### 3. Enable GitHub Pages
+### 3. Configure git hooks (optional but recommended)
+
+To automatically rebuild the catastrophes app before each commit:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+This prevents you from accidentally committing without the latest build.
+
+### 4. Enable GitHub Pages
 
 In your repo on GitHub:
 - Go to Settings → Pages
