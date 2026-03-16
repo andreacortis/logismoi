@@ -4,7 +4,7 @@ const CATS = [
   { id:"fold",        name:"Fold",               codim:1, corank:1, color:"#f97316", potential:"x\u00B3/3 + cx" },
   { id:"cusp",        name:"Cusp",               codim:2, corank:1, color:"#00cc60", potential:"x\u2074/4 + bx\u00B2/2 + ax" },
   { id:"swallowtail", name:"Swallowtail",        codim:3, corank:1, color:"#a78bfa", potential:"x\u2075/5 + ax\u00B3/3 + bx\u00B2/2 + cx" },
-  { id:"butterfly",   name:"Butterfly",          codim:4, corank:1, color:"#e879f9", potential:"x\u2076/6 + ..." },
+  { id:"butterfly",   name:"Butterfly",          codim:4, corank:1, color:"#e879f9", potential:"x\u2076/6 + ax\u2074/4 + cx\u00B2/2 + dx" },
   { id:"elliptic",    name:"Elliptic Umbilic",   codim:3, corank:2, color:"#fb7185", potential:"x\u00B3 \u2212 3xy\u00B2 + c(x\u00B2+y\u00B2) \u2212 ax \u2212 by" },
   { id:"hyperbolic",  name:"Hyperbolic Umbilic", codim:3, corank:2, color:"#34d399", potential:"x\u00B3 + y\u00B3 + cxy \u2212 ax \u2212 by" },
   { id:"parabolic",   name:"Parabolic Umbilic",  codim:4, corank:2, color:"#fbbf24", potential:"x\u00B2y + y\u2074 + cx\u00B2 + dy\u00B2 \u2212 ax \u2212 by" },
