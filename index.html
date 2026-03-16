@@ -622,7 +622,7 @@ function setQuoteFallback() {
     year: 1972
   };
   const text = fallback.quote;
-  const attr = `${fallback.author} · ${fallback.source} · ${fallback.year}`;
+  const attr = fallback.year ? `${fallback.author} · ${fallback.source} · ${fallback.year}` : fallback.author;
   document.getElementById('quote-text').textContent = text;
   document.getElementById('quote-attr').textContent = attr;
 }
@@ -635,7 +635,8 @@ function setQuote() {
   }
   
   const text = q.quote;
-  const attr = `${q.author} · ${q.source} · ${q.year}`;
+  // Only show source/year if year exists, otherwise just show author
+  const attr = q.year ? `${q.author} · ${q.source} · ${q.year}` : q.author;
   
   document.getElementById('quote-text').textContent = text;
   document.getElementById('quote-attr').textContent = attr;
@@ -645,7 +646,9 @@ function copyQuote() {
   const q = getRandomQuote();
   if (!q) return;
   
-  const text = `"${q.quote}"\n\n— ${q.author} · ${q.source} · ${q.year}`;
+  // Only include source/year if year exists
+  const attr = q.year ? `${q.author} · ${q.source} · ${q.year}` : q.author;
+  const text = `"${q.quote}"\n\n— ${attr}`;
   navigator.clipboard.writeText(text).then(() => {
     const hint = document.getElementById('copy-hint');
     hint.textContent = '✓ copied';
